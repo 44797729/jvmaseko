@@ -36,10 +36,10 @@
         End Try
     End Function
 
-    Public Function ConvertCsvToDatatableExtended() As DataTable
+    Public Function ConvertCsvToDatatableExtended(Filename As String) As DataTable
         Dim obj As New Datalayer.Datalayer()
         Try
-            Return obj.ConvertCsvToDatatableExtended()
+            Return obj.ConvertCsvToDatatableExtended(Filename)
 
         Catch ex As Exception
 
