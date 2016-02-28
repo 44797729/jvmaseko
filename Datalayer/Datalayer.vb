@@ -51,6 +51,9 @@ Public Class Datalayer
         End Using
         Return dssample
     End Function
+
+
+  
     Public Function ConvertCsvToDatatableExtended(filename As String) As DataTable
         '   Dim fileName = "C:\unisa\ICT3611\ASSIGNMENT 1\Assignment1\Datalayer\Flatfiles\Customer.csv"
         Dim delimiters As String = ","

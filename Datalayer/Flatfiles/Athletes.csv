@@ -1,2 +1,4 @@
-Eventid,Eventname,Eventlocation,EventDistance,EventDate,EventRegistrationfee
-95c51c41-8ba7-4233-8dc6-aa116e99de13,A,d,d,2016/02/12 12:00:00 AM,323
+Athleteid,AthleteFirstname,AthleteSurname,AthleteAddress,AthleteGender,AthleteDateofBirth,Datejoined,amountdue,Membershipnumber
+86f4104e-dc53-4c27-91b9-882bf2f3f1ea,Vuyiswa,Maseko,Eersterust,Male,1983/06/15 12:00:00 AM,2016/02/28 12:00:00 AM,0,16198306154676
+f9ca3e11-65c4-4cb6-b71b-f22a39f13e9a,Sipho,Msiza,Eersterust,Male,1983/06/15 12:00:00 AM,2016/02/28 12:00:00 AM,0,16198306152265
+f13a9ef3-45be-46e3-9b2f-34cb9e87ce27,Zanele,Maseko,Eersterust,Male,1983/06/16 12:00:00 AM,2016/02/28 12:00:00 AM,0,16198306168906

@@ -35,6 +35,8 @@
 
         End Try
     End Function
+ 
+
 
     Public Function ConvertCsvToDatatableExtended(Filename As String) As DataTable
         Dim obj As New Datalayer.Datalayer()
@@ -42,7 +44,8 @@
             Return obj.ConvertCsvToDatatableExtended(Filename)
 
         Catch ex As Exception
-
+        Finally
+            obj = Nothing
         End Try
     End Function
 
