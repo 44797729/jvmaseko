@@ -1,6 +1,7 @@
 ﻿Imports System.Data.OleDb
 Imports System.IO
 Imports Microsoft.VisualBasic.FileIO
+Imports System.Reflection
 
 Public Class Datalayer
 
@@ -40,8 +41,9 @@ Public Class Datalayer
 
 
     Public Function ConvertCsvToDatatable()
+        Dim folder As String = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Flatfiles\")
 
-        Dim folder = "C:\unisa\ICT3611\ASSIGNMENT 1\Assignment1\Datalayer\Flatfiles\"
+        'Dim folder = "C:\unisa\ICT3611\ASSIGNMENT 1\Assignment1\Datalayer\Flatfiles\"
         Dim cnStr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & folder & ";Extended Properties=""text;HDR=No;FMT=Delimited"";"
 
         Dim dssample As New DataTable
@@ -53,14 +55,14 @@ Public Class Datalayer
     End Function
 
 
-  
+
     Public Function ConvertCsvToDatatableExtended(filename As String) As DataTable
         '   Dim fileName = "C:\unisa\ICT3611\ASSIGNMENT 1\Assignment1\Datalayer\Flatfiles\Customer.csv"
         Dim delimiters As String = ","
         Dim firstRowContainsFieldNames As Boolean = True
         Dim result As New DataTable()
 
-        Using tfp As New TextFieldParser(fileName)
+        Using tfp As New TextFieldParser(filename)
             tfp.SetDelimiters(delimiters)
 
             ' Get Some Column Names
