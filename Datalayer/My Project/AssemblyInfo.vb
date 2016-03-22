@@ -2,7 +2,7 @@
 Imports System.Reflection
 Imports System.Runtime.InteropServices
 
-' General Information about an assembly is controlled through the following 
+' General Information about an assembly is cmdoletrolled through the following 
 ' set of attributes. Change these attribute values to modify the information
 ' associated with an assembly.
 
@@ -20,7 +20,7 @@ Imports System.Runtime.InteropServices
 'The following GUID is for the ID of the typelib if this project is exposed to COM
 <Assembly: Guid("7d6ff5fd-a28e-4e28-a97c-0645bfa87161")> 
 
-' Version information for an assembly consists of the following four values:
+' Version information for an assembly cmdolesists of the following four values:
 '
 '      Major Version
 '      Minor Version 
