@@ -1,11 +1,13 @@
-﻿Public Class BusinessLayer
+﻿Imports Datalayer
+
+Public Class BusinessLayer
 
 
     Public Sub Convert_DataTable_To_CSV(ByVal dtable As DataTable, ByVal pathFilename As String, ByVal sepChar As String)
 
         Dim obj As New Datalayer.Datalayer()
         Try
-            obj.Convert_DataTable_To_CSV(dtable, pathFilename, sepChar) 
+            obj.Convert_DataTable_To_CSV(dtable, pathFilename, sepChar)
 
         Catch ex As Exception
 
@@ -35,7 +37,7 @@
 
         End Try
     End Function
- 
+
 
 
     Public Function ConvertCsvToDatatableExtended(Filename As String) As DataTable
@@ -50,4 +52,44 @@
     End Function
 
 
+
+    Public Sub UpdateAthelete(model As AtheleteModel)
+
+        Dim obj As New Datalayer.Datalayer()
+        Try
+            obj.AddAthelete(model)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Public Sub AddAthelete(model As AtheleteModel)
+
+        Dim obj As New Datalayer.Datalayer()
+        Try
+            obj.AddAthelete(model)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Public Function GetAthletes() As DataTable
+
+        Dim obj As New Datalayer.Datalayer()
+        Try
+            Return obj.GetAthletes()
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+    Public Sub DeleteAthlete(model As AtheleteModel)
+
+        Dim obj As New Datalayer.Datalayer()
+        Try
+            obj.DeleteAthlete(model)
+        Catch ex As Exception
+
+        End Try
+
+
+    End Sub
 End Class
