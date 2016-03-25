@@ -108,13 +108,13 @@ Public Class Datalayer
 #End Region
 
 #Region "Athletes"
-    Public Function GetAthlete(AC_DESC As String) As DataTable
+    Public Function GetAthletes() As DataTable
         conole = New OleDbConnection(strConnectionString)
         cmdole = New OleDbCommand()
         cmdole.CommandType = System.Data.CommandType.StoredProcedure
         cmdole.CommandTimeout = 0
         cmdole.Connection = conole
-        cmdole.CommandText = "select * from Athlete"
+        cmdole.CommandText = "select * from Athletes"
         Dim dt As New DataTable()
         daole = New OleDbDataAdapter()
         daole.SelectCommand = cmdole
@@ -132,7 +132,7 @@ Public Class Datalayer
 
 
 
-    Public Function AddAthelete(model As AtheleteModel) As Integer
+    Public Sub AddAthelete(model As AtheleteModel)
         Me.conole = New OleDbConnection(Me.strConnectionString)
 
         Me.cmdole = New OleDbCommand()
@@ -151,77 +151,67 @@ Public Class Datalayer
 
         Me.cmdole.Parameters.Add("@AthleteGender", SqlDbType.VarChar).Value = model.AthleteGender
 
-        Me.cmdole.Parameters.Add("@AthleteDateofBirth", SqlDbType.Date).Value = model.AthleteDateofBirth
+        Me.cmdole.Parameters.Add("@AthleteDateofBirth", SqlDbType.Date).Value = model.AthleteDateofBirth 
+        Me.cmdole.Parameters.Add("@Datejoined", SqlDbType.Date).Value = model.Datejoined
+ 
 
-        Me.cmdole.Parameters.Add("@Athleteid", SqlDbType.Int).Value = model.Athleteid
+        Try
+            Me.conole.Open()
+
+            Me.cmdole.ExecuteNonQuery()
+        Catch ex As OleDb.OleDbException
+            Throw ex
+        Finally
+            Me.conole.Close()
+        End Try 
+    End Sub
+    Public Sub UpdateAthelete(model As AtheleteModel)
+        Me.conole = New OleDbConnection(Me.strConnectionString)
+
+        Me.cmdole = New OleDbCommand()
+
+        Me.cmdole.CommandText = "Update Athletes set Journals SET  AthleteFirstname=? ,AthleteSurname=?,AthleteGender=?,AthleteDateofBirth=?,Datejoined=?  WHERE Athleteid=?"
+
+        Me.cmdole.CommandType = CommandType.StoredProcedure
+
+        Me.cmdole.Connection = Me.conole
+
+        Me.cmdole.Parameters.Add("@AthleteFirstname", SqlDbType.VarChar).Value = model.AthleteFirstname
+
+        Me.cmdole.Parameters.Add("@AthleteSurname", SqlDbType.VarChar).Value = model.AthleteSurname
+
+        Me.cmdole.Parameters.Add("@AthleteGender", SqlDbType.VarChar).Value = model.AthleteGender
+
+        Me.cmdole.Parameters.Add("@AthleteDateofBirth", SqlDbType.Date).Value = model.AthleteDateofBirth
 
         Me.cmdole.Parameters.Add("@Datejoined", SqlDbType.Date).Value = model.Datejoined
 
-        Dim isValid As Integer = 0
+        Me.cmdole.Parameters.Add("@Athleteid", SqlDbType.UniqueIdentifier).Value = model.Athleteid
+
 
         Try
             Me.conole.Open()
 
             Me.cmdole.ExecuteNonQuery()
+
         Catch ex As OleDb.OleDbException
             Throw ex
         Finally
             Me.conole.Close()
         End Try
-        Return isValid
-    End Function
-    Public Function UpdateAthelete(_sUSERNAME As [String]) As Integer
+    End Sub
+    Public Sub  DeleteAthlete(model As AtheleteModel) 
         Me.conole = New OleDbConnection(Me.strConnectionString)
 
         Me.cmdole = New OleDbCommand()
 
-        Me.cmdole.CommandText = "sp_CheckUserExistance"
+        Me.cmdole.CommandText = "Delete Athletes where Athleteid=? "
 
         Me.cmdole.CommandType = CommandType.StoredProcedure
 
         Me.cmdole.Connection = Me.conole
 
-        Me.cmdole.Parameters.Add("@USERNAME", SqlDbType.VarChar).Value = _sUSERNAME
-
-        Me.cmdole.Parameters.Add("@RESULTS", SqlDbType.Int)
-
-        Me.cmdole.Parameters("@RESULTS").Direction = ParameterDirection.Output
-
-        Dim isValid As Integer = 0
-
-        Try
-            Me.conole.Open()
-
-            Me.cmdole.ExecuteNonQuery()
-
-            isValid = CInt(Me.cmdole.Parameters("@RESULTS").Value)
-        Catch ex As OleDb.OleDbException
-            Throw ex
-        Finally
-            Me.conole.Close()
-        End Try
-        Return isValid
-    End Function
-    Public Function DeleteAthlete(sUsername As [String], sPassword As [String]) As Integer
-        Me.conole = New OleDbConnection(Me.strConnectionString)
-
-        Me.cmdole = New OleDbCommand()
-
-        Me.cmdole.CommandText = "sp_Authonticateuser"
-
-        Me.cmdole.CommandType = CommandType.StoredProcedure
-
-        Me.cmdole.Connection = Me.conole
-
-        Me.cmdole.Parameters.Add("@USERNAME", SqlDbType.VarChar).Value = sUsername
-
-        Me.cmdole.Parameters.Add("@PASSWORD", SqlDbType.VarChar).Value = sPassword
-
-        Me.cmdole.Parameters.Add("@RESULTS", SqlDbType.Int)
-
-        Me.cmdole.Parameters("@RESULTS").Direction = ParameterDirection.Output
-
-        Dim isValid As Integer = 0
+        Me.cmdole.Parameters.Add("@Athleteid", SqlDbType.UniqueIdentifier).Value = model.Athleteid
 
 
         Try
@@ -234,8 +224,7 @@ Public Class Datalayer
         Finally
             Me.conole.Close()
         End Try
-        Return isValid
-    End Function
+    End Sub
 
 #End Region
 
