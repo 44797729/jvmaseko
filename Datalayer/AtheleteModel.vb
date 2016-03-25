@@ -61,6 +61,18 @@
         End Set
     End Property
 
+    Private _membershipnumber As String
+
+    Public Property membershipnumber() As String
+        Get
+            Return _membershipnumber
+        End Get
+        Set(ByVal value As String)
+            _membershipnumber = value
+        End Set
+    End Property
+
+
 
 
     Private _AthleteDateofBirth As Date
@@ -100,9 +112,5 @@
             _amountdue = value
         End Set
     End Property
-
-
-
-
- 
+     
 End Class
