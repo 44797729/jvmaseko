@@ -111,7 +111,8 @@ Public Class Datalayer
     Public Function GetAthletes() As DataTable
         conole = New OleDbConnection(strConnectionString)
         cmdole = New OleDbCommand()
-        cmdole.CommandType = System.Data.CommandType.StoredProcedure
+        cmdole.CommandType = System.Data.CommandType.Text
+
         cmdole.CommandTimeout = 0
         cmdole.Connection = conole
         cmdole.CommandText = "select * from Athletes"
@@ -137,7 +138,7 @@ Public Class Datalayer
 
         Me.cmdole = New OleDbCommand()
 
-        Me.cmdole.CommandText = "INSERT INTO  Athletes values (?,?,?,?,?,?)"
+        Me.cmdole.CommandText = "INSERT INTO  Athletes values (?,?,?,?,?,?,?,?,?)"
 
         Me.cmdole.CommandType = CommandType.Text
 
@@ -149,12 +150,17 @@ Public Class Datalayer
 
         Me.cmdole.Parameters.Add("@AthleteSurname", SqlDbType.VarChar).Value = model.AthleteSurname
 
+        Me.cmdole.Parameters.Add("@AthleteAddress", SqlDbType.VarChar).Value = model.AthleteAddress
+         
         Me.cmdole.Parameters.Add("@AthleteGender", SqlDbType.VarChar).Value = model.AthleteGender
 
-        Me.cmdole.Parameters.Add("@AthleteDateofBirth", SqlDbType.Date).Value = model.AthleteDateofBirth 
-        Me.cmdole.Parameters.Add("@Datejoined", SqlDbType.Date).Value = model.Datejoined
- 
+        Me.cmdole.Parameters.Add("@AthleteDateofBirth", SqlDbType.DateTime).Value = model.AthleteDateofBirth
 
+        Me.cmdole.Parameters.Add("@Datejoined", SqlDbType.DateTime).Value = model.Datejoined
+ 
+        Me.cmdole.Parameters.Add("@amountdue", SqlDbType.Decimal).Value = model.amountdue
+
+        Me.cmdole.Parameters.Add("@membershipnumber", SqlDbType.VarChar).Value = model.membershipnumber
         Try
             Me.conole.Open()
 
@@ -172,7 +178,8 @@ Public Class Datalayer
 
         Me.cmdole.CommandText = "Update Athletes set Journals SET  AthleteFirstname=? ,AthleteSurname=?,AthleteGender=?,AthleteDateofBirth=?,Datejoined=?  WHERE Athleteid=?"
 
-        Me.cmdole.CommandType = CommandType.StoredProcedure
+        Me.cmdole.CommandType = CommandType.Text
+
 
         Me.cmdole.Connection = Me.conole
 
@@ -207,7 +214,7 @@ Public Class Datalayer
 
         Me.cmdole.CommandText = "Delete Athletes where Athleteid=? "
 
-        Me.cmdole.CommandType = CommandType.StoredProcedure
+        Me.cmdole.CommandType = CommandType.Text
 
         Me.cmdole.Connection = Me.conole
 
