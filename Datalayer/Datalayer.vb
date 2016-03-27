@@ -144,7 +144,7 @@ Public Class Datalayer
 
         Me.cmdole.Connection = Me.conole
 
-        Me.cmdole.Parameters.Add("@Athleteid", SqlDbType.UniqueIdentifier).Value = model.Athleteid
+        Me.cmdole.Parameters.Add("@Athleteid", SqlDbType.UniqueIdentifier).Value = model.Athleteid.ToString.Replace("{", "").Replace("}", "").ToUpper()
 
         Me.cmdole.Parameters.Add("@AthleteFirstname", SqlDbType.VarChar).Value = model.AthleteFirstname
 
@@ -176,7 +176,7 @@ Public Class Datalayer
 
         Me.cmdole = New OleDbCommand()
 
-        Me.cmdole.CommandText = "Update Athletes set Journals SET  AthleteFirstname=? ,AthleteSurname=?,AthleteGender=?,AthleteDateofBirth=?,Datejoined=?  WHERE Athleteid=?"
+        Me.cmdole.CommandText = "Update Athletes SET  AthleteFirstname=? ,AthleteSurname=?,AthleteGender=?,AthleteDateofBirth=?,Datejoined=?  WHERE Athleteid=?"
 
         Me.cmdole.CommandType = CommandType.Text
 
@@ -212,14 +212,12 @@ Public Class Datalayer
 
         Me.cmdole = New OleDbCommand()
 
-        Me.cmdole.CommandText = "Delete Athletes where Athleteid=? "
+        Me.cmdole.CommandText = "DELETE from Athletes WHERE Athleteid='" & model.Athleteid.ToString().ToUpper() & "'"
 
         Me.cmdole.CommandType = CommandType.Text
 
         Me.cmdole.Connection = Me.conole
-
-        Me.cmdole.Parameters.Add("@Athleteid", SqlDbType.UniqueIdentifier).Value = model.Athleteid
-
+         
 
         Try
             Me.conole.Open()
