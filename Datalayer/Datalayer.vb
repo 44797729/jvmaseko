@@ -176,12 +176,13 @@ Public Class Datalayer
 
         Me.cmdole = New OleDbCommand()
 
-        Me.cmdole.CommandText = "Update Athletes SET  AthleteFirstname=? ,AthleteSurname=?,AthleteGender=?,AthleteDateofBirth=?,Datejoined=?  WHERE Athleteid=?"
+        Me.cmdole.CommandText = "Update Athletes SET  AthleteFirstname=? ,AthleteSurname=?,AthleteGender=?,AthleteAddress=?,AthleteDateofBirth=?,Datejoined=?,amountdue=?  WHERE Athleteid=?"
 
         Me.cmdole.CommandType = CommandType.Text
 
 
         Me.cmdole.Connection = Me.conole
+         
 
         Me.cmdole.Parameters.Add("@AthleteFirstname", SqlDbType.VarChar).Value = model.AthleteFirstname
 
@@ -189,11 +190,15 @@ Public Class Datalayer
 
         Me.cmdole.Parameters.Add("@AthleteGender", SqlDbType.VarChar).Value = model.AthleteGender
 
-        Me.cmdole.Parameters.Add("@AthleteDateofBirth", SqlDbType.Date).Value = model.AthleteDateofBirth
+        Me.cmdole.Parameters.Add("@AthleteAddress", SqlDbType.VarChar).Value = model.AthleteAddress
 
-        Me.cmdole.Parameters.Add("@Datejoined", SqlDbType.Date).Value = model.Datejoined
+        Me.cmdole.Parameters.Add("@AthleteDateofBirth", SqlDbType.DateTime).Value = model.AthleteDateofBirth
 
-        Me.cmdole.Parameters.Add("@Athleteid", SqlDbType.UniqueIdentifier).Value = model.Athleteid
+        Me.cmdole.Parameters.Add("@Datejoined", SqlDbType.DateTime).Value = model.Datejoined
+
+        Me.cmdole.Parameters.Add("@amountdue", SqlDbType.Decimal).Value = model.amountdue
+          
+        Me.cmdole.Parameters.Add("@Athleteid", SqlDbType.VarChar).Value = model.Athleteid.ToString.Replace("{", "").Replace("}", "").ToUpper()
 
 
         Try

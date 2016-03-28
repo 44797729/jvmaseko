@@ -57,7 +57,7 @@ Public Class BusinessLayer
 
         Dim obj As New Datalayer.Datalayer()
         Try
-            obj.AddAthelete(model)
+            obj.UpdateAthelete(model)
         Catch ex As Exception
 
         End Try
