@@ -359,7 +359,115 @@ Public Class Datalayer
 
 #End Region
 
+#Region "Athletes Events"
+    Public Function GetAthletesEvents() As DataTable
+        conole = New OleDbConnection(strConnectionString)
+        cmdole = New OleDbCommand()
+        cmdole.CommandType = System.Data.CommandType.Text
 
+        cmdole.CommandTimeout = 0
+        cmdole.Connection = conole
+        cmdole.CommandText = "select * from AtheleteEvents"
+        Dim dt As New DataTable()
+        daole = New OleDbDataAdapter()
+        daole.SelectCommand = cmdole
+        Try
+            conole.Open()
+            daole.Fill(dt)
+        Catch ex As OleDb.OleDbException
+            Throw ex
+        Finally
+            conole.Close()
+        End Try
+        Return dt
+
+    End Function
+
+
+
+    Public Sub AddAtheleteEvents(model As AtheleteEventsModel)
+        Me.conole = New OleDbConnection(Me.strConnectionString)
+
+        Me.cmdole = New OleDbCommand()
+
+        Me.cmdole.CommandText = "INSERT INTO  AtheleteEvents values (?,?,?,?)"
+
+        Me.cmdole.CommandType = CommandType.Text
+
+        Me.cmdole.Connection = Me.conole
+
+        Me.cmdole.Parameters.Add("@Athleteid", SqlDbType.UniqueIdentifier).Value = model.Eventid.ToString.Replace("{", "").Replace("}", "").ToUpper()
+         
+        Me.cmdole.Parameters.Add("@EventDate", SqlDbType.DateTime).Value = model.EventDate
+         
+        Me.cmdole.Parameters.Add("@EventResults", SqlDbType.Int).Value = model.EventResults
+
+        Me.cmdole.Parameters.Add("@membershipnumber", SqlDbType.VarChar).Value = model.Membershipnumber
+        Try
+            Me.conole.Open()
+
+            Me.cmdole.ExecuteNonQuery()
+        Catch ex As OleDb.OleDbException
+            Throw ex
+        Finally
+            Me.conole.Close()
+        End Try
+    End Sub
+    Public Sub UpdateAtheleteEvents(model As AtheleteEventsModel)
+        Me.conole = New OleDbConnection(Me.strConnectionString)
+
+        Me.cmdole = New OleDbCommand()
+
+        Me.cmdole.CommandText = "Update AtheleteEvents SET  EventDate=? ,EventResults=?  WHERE Athleteid=?"
+
+        Me.cmdole.CommandType = CommandType.Text 
+        Me.cmdole.Connection = Me.conole
+
+        Me.cmdole.Parameters.Add("@Athleteid", SqlDbType.UniqueIdentifier).Value = model.Eventid.ToString.Replace("{", "").Replace("}", "").ToUpper()
+
+        Me.cmdole.Parameters.Add("@EventDate", SqlDbType.DateTime).Value = model.EventDate
+
+        Me.cmdole.Parameters.Add("@EventResults", SqlDbType.Int).Value = model.EventResults
+
+        Me.cmdole.Parameters.Add("@membershipnumber", SqlDbType.VarChar).Value = model.Membershipnumber
+
+
+        Try
+            Me.conole.Open()
+
+            Me.cmdole.ExecuteNonQuery()
+
+        Catch ex As OleDb.OleDbException
+            Throw ex
+        Finally
+            Me.conole.Close()
+        End Try
+    End Sub
+    Public Sub DeleteAthleteEvents(model As AtheleteEventsModel)
+        Me.conole = New OleDbConnection(Me.strConnectionString)
+
+        Me.cmdole = New OleDbCommand()
+
+        Me.cmdole.CommandText = "DELETE from AtheleteEvents WHERE Athleteid='" & model.Eventid.ToString.Replace("{", "").Replace("}", "").ToUpper() & "'"
+
+        Me.cmdole.CommandType = CommandType.Text
+
+        Me.cmdole.Connection = Me.conole
+
+
+        Try
+            Me.conole.Open()
+
+            Me.cmdole.ExecuteNonQuery()
+
+        Catch ex As OleDb.OleDbException
+            Throw ex
+        Finally
+            Me.conole.Close()
+        End Try
+    End Sub
+
+#End Region
 #End Region
 
 End Class

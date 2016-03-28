@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AtheleteModel.vb" />
+    <Compile Include="AtheleteEventsModel.vb" />
     <Compile Include="EventsModel.vb" />
     <Compile Include="Datalayer.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
