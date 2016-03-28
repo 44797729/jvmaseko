@@ -97,7 +97,7 @@ Public Class BusinessLayer
 
 #Region "Oledb Events"
 
-    Public Sub UpdateEvents(model As AtheleteModel)
+    Public Sub UpdateEvents(model As EventsModel)
 
         Dim obj As New Datalayer.Datalayer()
         Try
@@ -106,7 +106,7 @@ Public Class BusinessLayer
 
         End Try
     End Sub
-    Public Sub AddEvents(model As AtheleteModel)
+    Public Sub AddEvents(model As EventsModel)
 
         Dim obj As New Datalayer.Datalayer()
         Try
@@ -124,7 +124,7 @@ Public Class BusinessLayer
 
         End Try
     End Function
-    Public Sub DeleteEvents(model As AtheleteModel)
+    Public Sub DeleteEvents(model As EventsModel)
 
         Dim obj As New Datalayer.Datalayer()
         Try
