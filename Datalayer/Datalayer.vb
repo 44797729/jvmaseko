@@ -239,6 +239,133 @@ Public Class Datalayer
 #End Region
 
 #Region "Events"
+    Public Function GetEvents() As DataTable
+        conole = New OleDbConnection(strConnectionString)
+        cmdole = New OleDbCommand()
+        cmdole.CommandType = System.Data.CommandType.Text
+
+        cmdole.CommandTimeout = 0
+        cmdole.Connection = conole
+        cmdole.CommandText = "select * from Athletes"
+        Dim dt As New DataTable()
+        daole = New OleDbDataAdapter()
+        daole.SelectCommand = cmdole
+        Try
+            conole.Open()
+            daole.Fill(dt)
+        Catch ex As OleDb.OleDbException
+            Throw ex
+        Finally
+            conole.Close()
+        End Try
+        Return dt
+
+    End Function
+
+
+
+    Public Sub AddEvents(model As AtheleteModel)
+        Me.conole = New OleDbConnection(Me.strConnectionString)
+
+        Me.cmdole = New OleDbCommand()
+
+        Me.cmdole.CommandText = "INSERT INTO  Athletes values (?,?,?,?,?,?,?,?,?)"
+
+        Me.cmdole.CommandType = CommandType.Text
+
+        Me.cmdole.Connection = Me.conole
+
+        Me.cmdole.Parameters.Add("@Athleteid", SqlDbType.UniqueIdentifier).Value = model.Athleteid.ToString.Replace("{", "").Replace("}", "").ToUpper()
+
+        Me.cmdole.Parameters.Add("@AthleteFirstname", SqlDbType.VarChar).Value = model.AthleteFirstname
+
+        Me.cmdole.Parameters.Add("@AthleteSurname", SqlDbType.VarChar).Value = model.AthleteSurname
+
+        Me.cmdole.Parameters.Add("@AthleteAddress", SqlDbType.VarChar).Value = model.AthleteAddress
+
+        Me.cmdole.Parameters.Add("@AthleteGender", SqlDbType.VarChar).Value = model.AthleteGender
+
+        Me.cmdole.Parameters.Add("@AthleteDateofBirth", SqlDbType.DateTime).Value = model.AthleteDateofBirth
+
+        Me.cmdole.Parameters.Add("@Datejoined", SqlDbType.DateTime).Value = model.Datejoined
+
+        Me.cmdole.Parameters.Add("@amountdue", SqlDbType.Decimal).Value = model.amountdue
+
+        Me.cmdole.Parameters.Add("@membershipnumber", SqlDbType.VarChar).Value = model.membershipnumber
+        Try
+            Me.conole.Open()
+
+            Me.cmdole.ExecuteNonQuery()
+        Catch ex As OleDb.OleDbException
+            Throw ex
+        Finally
+            Me.conole.Close()
+        End Try
+    End Sub
+    Public Sub UpdateEvents(model As AtheleteModel)
+        Me.conole = New OleDbConnection(Me.strConnectionString)
+
+        Me.cmdole = New OleDbCommand()
+
+        Me.cmdole.CommandText = "Update Athletes SET  AthleteFirstname=? ,AthleteSurname=?,AthleteGender=?,AthleteAddress=?,AthleteDateofBirth=?,Datejoined=?,amountdue=?  WHERE Athleteid=?"
+
+        Me.cmdole.CommandType = CommandType.Text
+
+
+        Me.cmdole.Connection = Me.conole
+
+
+        Me.cmdole.Parameters.Add("@AthleteFirstname", SqlDbType.VarChar).Value = model.AthleteFirstname
+
+        Me.cmdole.Parameters.Add("@AthleteSurname", SqlDbType.VarChar).Value = model.AthleteSurname
+
+        Me.cmdole.Parameters.Add("@AthleteGender", SqlDbType.VarChar).Value = model.AthleteGender
+
+        Me.cmdole.Parameters.Add("@AthleteAddress", SqlDbType.VarChar).Value = model.AthleteAddress
+
+        Me.cmdole.Parameters.Add("@AthleteDateofBirth", SqlDbType.DateTime).Value = model.AthleteDateofBirth
+
+        Me.cmdole.Parameters.Add("@Datejoined", SqlDbType.DateTime).Value = model.Datejoined
+
+        Me.cmdole.Parameters.Add("@amountdue", SqlDbType.Decimal).Value = model.amountdue
+
+        Me.cmdole.Parameters.Add("@Athleteid", SqlDbType.VarChar).Value = model.Athleteid.ToString.Replace("{", "").Replace("}", "").ToUpper()
+
+
+        Try
+            Me.conole.Open()
+
+            Me.cmdole.ExecuteNonQuery()
+
+        Catch ex As OleDb.OleDbException
+            Throw ex
+        Finally
+            Me.conole.Close()
+        End Try
+    End Sub
+    Public Sub DeleteEvents(model As AtheleteModel)
+        Me.conole = New OleDbConnection(Me.strConnectionString)
+
+        Me.cmdole = New OleDbCommand()
+
+        Me.cmdole.CommandText = "DELETE from Athletes WHERE Athleteid='" & model.Athleteid.ToString().ToUpper() & "'"
+
+        Me.cmdole.CommandType = CommandType.Text
+
+        Me.cmdole.Connection = Me.conole
+
+
+        Try
+            Me.conole.Open()
+
+            Me.cmdole.ExecuteNonQuery()
+
+        Catch ex As OleDb.OleDbException
+            Throw ex
+        Finally
+            Me.conole.Close()
+        End Try
+    End Sub
 
 #End Region
 
