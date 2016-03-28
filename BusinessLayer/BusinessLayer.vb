@@ -137,4 +137,50 @@ Public Class BusinessLayer
     End Sub
 
 #End Region
+
+
+
+#Region "Oledb AthleteEvents"
+
+    Public Sub UpdateAtheleteEvents(model As AtheleteEventsModel)
+
+        Dim obj As New Datalayer.Datalayer()
+        Try
+            obj.UpdateAtheleteEvents(model)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Public Sub AddAtheleteEvents(model As AtheleteEventsModel)
+
+        Dim obj As New Datalayer.Datalayer()
+        Try
+            obj.AddAtheleteEvents(model)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Public Function GetAthletesEvents() As DataTable
+
+        Dim obj As New Datalayer.Datalayer()
+        Try
+            Return obj.GetAthletesEvents()
+        Catch ex As Exception
+
+        End Try
+    End Function
+    Public Sub DeleteAthleteEvents(model As AtheleteEventsModel)
+
+        Dim obj As New Datalayer.Datalayer()
+        Try
+            obj.DeleteAthleteEvents(model)
+        Catch ex As Exception
+
+        End Try
+
+
+    End Sub
+
+#End Region
+
 End Class
