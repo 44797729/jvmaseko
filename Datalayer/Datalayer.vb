@@ -396,13 +396,14 @@ Public Class Datalayer
 
         Me.cmdole.Connection = Me.conole
 
-        Me.cmdole.Parameters.Add("@Athleteid", SqlDbType.UniqueIdentifier).Value = model.Eventid.ToString.Replace("{", "").Replace("}", "").ToUpper()
+        Me.cmdole.Parameters.Add("@Eventid", SqlDbType.VarChar).Value = model.Eventid.ToString.Replace("{", "").Replace("}", "").ToUpper()
          
-        Me.cmdole.Parameters.Add("@EventDate", SqlDbType.DateTime).Value = model.EventDate
+        Me.cmdole.Parameters.Add("@EventDate", SqlDbType.VarChar).Value = model.EventDate.ToString()
          
-        Me.cmdole.Parameters.Add("@EventResults", SqlDbType.Int).Value = model.EventResults
+        Me.cmdole.Parameters.Add("@EventResults", SqlDbType.VarChar).Value = model.EventResults
 
-        Me.cmdole.Parameters.Add("@membershipnumber", SqlDbType.VarChar).Value = model.Membershipnumber
+        Me.cmdole.Parameters.Add("@Membershipnumber", SqlDbType.VarChar).Value = model.Membershipnumber
+
         Try
             Me.conole.Open()
 
@@ -423,15 +424,14 @@ Public Class Datalayer
         Me.cmdole.CommandType = CommandType.Text 
         Me.cmdole.Connection = Me.conole
 
-        Me.cmdole.Parameters.Add("@Athleteid", SqlDbType.UniqueIdentifier).Value = model.Eventid.ToString.Replace("{", "").Replace("}", "").ToUpper()
+        Me.cmdole.Parameters.Add("@Athleteid", SqlDbType.VarChar).Value = model.Eventid.ToString.Replace("{", "").Replace("}", "").ToUpper()
 
-        Me.cmdole.Parameters.Add("@EventDate", SqlDbType.DateTime).Value = model.EventDate
+        Me.cmdole.Parameters.Add("@EventDate", SqlDbType.VarChar).Value = model.EventDate
 
-        Me.cmdole.Parameters.Add("@EventResults", SqlDbType.Int).Value = model.EventResults
+        Me.cmdole.Parameters.Add("@EventResults", SqlDbType.VarChar).Value = model.EventResults
 
         Me.cmdole.Parameters.Add("@membershipnumber", SqlDbType.VarChar).Value = model.Membershipnumber
-
-
+         
         Try
             Me.conole.Open()
 
@@ -448,7 +448,7 @@ Public Class Datalayer
 
         Me.cmdole = New OleDbCommand()
 
-        Me.cmdole.CommandText = "DELETE from AtheleteEvents WHERE Athleteid='" & model.Eventid.ToString.Replace("{", "").Replace("}", "").ToUpper() & "'"
+        Me.cmdole.CommandText = "DELETE from AtheleteEvents WHERE Athleteid='" & model.Eventid.ToString.Replace("{", "").Replace("}", "").ToUpper() & "' And Membershipnumber=" & model.Membershipnumber
 
         Me.cmdole.CommandType = CommandType.Text
 
